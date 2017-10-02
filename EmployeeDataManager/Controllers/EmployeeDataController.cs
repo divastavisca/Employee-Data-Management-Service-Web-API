@@ -68,5 +68,10 @@ namespace EmployeeDataManager.Controllers
             if(_dataManager==null)
                 _dataManager = new RandomDataManager();
         }
+
+        public EmployeeDataController(IEmployeeDataManager dataManager)
+        {
+            _dataManager = dataManager;
+        }
     }
 }

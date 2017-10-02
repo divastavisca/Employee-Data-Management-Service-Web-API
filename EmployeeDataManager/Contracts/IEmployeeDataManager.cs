@@ -7,7 +7,7 @@ using EmployeeDataManager.Models;
 
 namespace EmployeeDataManager.Contracts
 {
-    interface IEmployeeDataManager
+    public interface IEmployeeDataManager
     {
         bool Add(EmployeeData employeeData,out string uri);
         bool GetAll(out List<Employee> employees);
