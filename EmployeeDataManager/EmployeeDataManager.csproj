@@ -79,6 +79,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Contracts\IEmployeeDataManager.cs" />
     <Compile Include="Controllers\EmployeeDataController.cs" />
+    <Compile Include="DataManagers\DatabaseManager.cs" />
+    <Compile Include="DataManagers\RandomDataManager.cs" />
+    <Compile Include="EmployeeData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

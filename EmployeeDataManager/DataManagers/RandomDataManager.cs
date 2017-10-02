@@ -9,19 +9,78 @@ namespace EmployeeDataManager.DataManagers
 {
     public class RandomDataManager : IEmployeeDataManager
     {
-        public bool Add(string firstName, string middleName, string lastName, string dateOfBirth, string emailId, string departmentId)
+        private List<Employee> _employeeList;
+
+        public RandomDataManager()
         {
-            throw new NotImplementedException();
+            _employeeList = new List<Employee>();
+            _employeeList.Add(new Employee("1", new Name("Divas", null, "Agarwal"), DateTime.Parse("08-10-1993"), "divasag93@gmail.com", "21"));
+            _employeeList.Add(new Employee("2", new Name("Suraj", null, "Narayan"), DateTime.Parse("10-05-1995"), "divasag93@gmail.com", "21"));
+            _employeeList.Add(new Employee("3", new Name("Amit", null, "Prakash"), DateTime.Parse("26-09-1981"), "divasag93@gmail.com", "21"));
         }
-        public List<Employee> GetAll()
+
+        public bool Add(EmployeeData employeeData,out string uri)
         {
-            throw new NotImplementedException();
+            uri = "4";
+            int count=_employeeList.Count;
+            _employeeList.Add(getEmployee(uri, employeeData));
+            if(count<_employeeList.Count)
+            {
+                return true;
+            }
+            else
+            {
+                uri = null;
+                return false;
+            }
         }
-        public Employee Get(string id)
+        public bool GetAll(out List<Employee> employees)
         {
-            throw new NotImplementedException();
+            if(_employeeList.Count>0)
+            {
+                employees = _employeeList;
+                return true;
+            }
+            else
+            {
+                employees = _employeeList;
+                return false;
+            }
         }
-        public bool Update(string id, Name name, string emailId, string departmentId)
+        public bool Get(string id,out Employee employee)
+        {
+            foreach(Employee emp in _employeeList)
+            {
+                if(emp.Id == id)
+                {
+                    employee = emp;
+                    return true;
+                }
+            }
+            employee = null;
+            return false;
+        }
+
+        private Employee getEmployee(string id, EmployeeData employeeData)
+        {
+            return
+                (
+                    new Employee
+                    (
+                        id,
+                        new Name
+                        (
+                            employeeData.Name.FirstName,
+                            employeeData.Name.MiddleName,
+                            employeeData.Name.LastName
+                        ),
+                        employeeData.DateOfBirth,
+                        employeeData.EmailId,
+                        employeeData.DepartmentId
+                    )
+                );
+        }
+        public bool Update(string id,EmployeeData newEmployeeData)
         {
             throw new NotImplementedException();
         }

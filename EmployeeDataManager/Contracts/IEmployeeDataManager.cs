@@ -9,10 +9,10 @@ namespace EmployeeDataManager.Contracts
 {
     interface IEmployeeDataManager
     {
-        bool Add(string firstName, string middleName, string lastName, string dateOfBirth, string emailId, string departmentId);
-        List<Employee> GetAll();
-        Employee Get(string id);
-        bool Update(string id, Name name, string emailId, string departmentId);
+        bool Add(EmployeeData employeeData,out string uri);
+        bool GetAll(out List<Employee> employees);
+        bool Get(string id,out Employee employee);
+        bool Update(string id, EmployeeData newEmployeeData);
         bool DeleteAll();
         bool Delete(string id);
     }

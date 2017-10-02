@@ -10,19 +10,19 @@ namespace EmployeeDataManager.DataManagers
     public class DatabaseManager : IEmployeeDataManager
     {
         private Dictionary<string, Employee> _cache;
-        public bool Add(string firstName, string middleName, string lastName, string dateOfBirth, string emailId, string departmentId)
+        public bool Add(EmployeeData employeeData,out string uri)
         {
             throw new NotImplementedException();
         }
-        public List<Employee> GetAll()
+        public bool GetAll(out List<Employee> employees)
         {
             throw new NotImplementedException();
         }
-        public Employee Get(string id)
+        public bool Get(string id,out Employee employee)
         {
             throw new NotImplementedException();
         }
-        public bool Update(string id, Name name, string emailId, string departmentId)
+        public bool Update(string id, EmployeeData employeeData)
         {
             throw new NotImplementedException();
         }
@@ -35,7 +35,7 @@ namespace EmployeeDataManager.DataManagers
             throw new NotImplementedException();
         }
 
-        private Employee getEmployee(string id, string firstName, string middleName, string lastName, DateTime dateOfBirth, string emailId, string departmentId)
+        private Employee getEmployee(string id, EmployeeData employeeData)
         {
             return
                 (
@@ -44,30 +44,25 @@ namespace EmployeeDataManager.DataManagers
                         id,
                         new Name
                         (
-                            firstName,
-                            middleName,
-                            lastName
+                            employeeData.Name.FirstName,
+                            employeeData.Name.MiddleName,
+                            employeeData.Name.LastName
                         ),
-                        dateOfBirth,
-                        emailId,
-                        departmentId
+                        employeeData.DateOfBirth,
+                        employeeData.EmailId,
+                        employeeData.DepartmentId
                     )
                 );
         }
 
-        private void fillCache()
+        private void addToCache(string id,Employee employee)
         {
-            if (_cache.Count > 0)
-            {
-                _cache.Clear();
-            }
-
+            _cache.Add(id,employee);
         }
 
         public DatabaseManager()
         {
             _cache = new Dictionary<string, Employee>();
-            fillCache();
         }
     }
 }
