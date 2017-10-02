@@ -80,17 +80,43 @@ namespace EmployeeDataManager.DataManagers
                     )
                 );
         }
+
         public bool Update(string id,EmployeeData newEmployeeData)
         {
-            throw new NotImplementedException();
+            int k = 0;
+            foreach(Employee emp in _employeeList)
+            {
+                if(emp.Id==id)
+                {
+                    _employeeList[k] = getEmployee(id, newEmployeeData);
+                    return true;
+                }
+                k++;
+            }
+            return false;
         }
+
         public bool DeleteAll()
         {
-            throw new NotImplementedException();
+            if(_employeeList.Count>0)
+            {
+                _employeeList.Clear();
+                return true;
+            }
+            return false;
         }
+
         public bool Delete(string id)
         {
-            throw new NotImplementedException();
+            foreach (Employee emp in _employeeList)
+            {
+                if (emp.Id == id)
+                {
+                    _employeeList.Remove(emp);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
